@@ -1,0 +1,43 @@
+/*************************************************************************
+	> File Name: hdu_1711_kmp.cpp
+	> Author: dulun
+	> Mail: dulun@xiyoulinux.org
+	> Created Time: 2016年03月12日 星期六 18时12分29秒
+ ************************************************************************/
+
+#include<iostream>
+#include<stdio.h>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#define LL long long
+using namespace std;
+ 
+const int N = 50086;
+char a[1000009];//一百万
+char *b = "aabaabaaa";  //一万
+int next[10009];
+
+void getnext(int m)
+{
+    int j, k;
+    j = 0, k = -1;
+    while(j < m)
+    {
+        if(k == -1 || b[j] == b[k]){ next[++j] = ++k; printf("next[%d] = %d\n", j, next[j]);}
+        else {k = next[k], printf("next[%d] = %d\n", k, next[k]);}
+    }
+
+    for(int i = 0; i < m ; i++)
+    {
+        printf("next[%d] = %d\n", i, next[i]);
+    }
+
+}
+
+
+int main()
+{
+    getnext(strlen(b));
+    return 0;
+}

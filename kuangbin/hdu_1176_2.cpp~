@@ -1,0 +1,68 @@
+/*************************************************************************
+	> File Name: hdu_1176.cpp
+	> Author: dulun
+	> Mail: dulun@xiyoulinux.org
+	> Created Time: 2016年03月04日 星期五 19时13分16秒
+ ************************************************************************/
+
+#include<iostream>
+#include<stdio.h>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#define LL long long
+using namespace std;
+ 
+const int N = 100086;
+
+int dp[11][N];
+int num[11][N];
+
+
+int main()
+{
+    int n, T = 0; 
+
+    int ma = 0;
+    scanf("%d", &n);
+    for(int i = 0; i < n; i++)
+    {
+        int point, time;
+        scanf("%d%d", &point, &time);
+        num[point][time]++;
+        if(time > T) T = time;
+    }
+
+    int i = 5, t = 1;
+    for(t = 0; t <= T; t++)
+    {
+        //dp[i][t] = num[i][t] + max(dp[i][t-1], max(dp[i-1][t-1] , dp[i+1][t-1]));   
+        if(t < 5)
+        {
+            for(int i = 5 - t; i <= 5+t; i++)
+            {
+                //dp[i][t] += dp[i][t-1] + max(num[i][t], max(num[i+1][t], num[i-1][t]));
+                //dp[i][t] = num[i][t] +
+                dp[i][t] = num[i][t] + max(dp[i][t-1], max(dp[i-1][t-1] , dp[i+1][t-1]));   
+              //  printf("dp[%d][%d] = %d\n",i, t, dp[i][t]);
+                if(dp[i][t] > ma) ma = dp[i][t];
+            }
+        }
+        
+        if(t >= 5)
+        {
+            for(int i = 0; i <= 10; i++)
+            {
+                //dp[t] += dp[t-1] + max(num[i][t], max(num[i+1][t], num[i-1][t]));
+                dp[i][t] = num[i][t] + max(dp[i][t-1], max(dp[i-1][t-1] , dp[i+1][t-1]));   
+             //   printf("dp[%d][%d] = %d\n",i, t, dp[i][t]);
+                if(dp[i][t] > ma) ma = dp[i][t];
+            }
+        }
+        
+    }
+ 
+    cout<<ma;
+    return 0;
+}
+
