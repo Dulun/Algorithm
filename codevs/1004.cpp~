@@ -1,0 +1,51 @@
+/*************************************************************************
+	> File Name: 1004.cpp
+	> Author: dulun
+	> Mail: dulun@xiyoulinux.org
+	> Created Time: 2015年11月29日 星期日 15时51分58秒
+ ************************************************************************/
+
+#include<iostream>
+#include<stdio.h>
+#include<queue>
+using namespace std;
+
+char map[4][4];
+
+bool charge(char * map)
+{
+    for(i = 0; i < 4; i++)
+    {
+        if(map[i][0] == map[i][1] == map[i][2] == map[i][3] == 'B')
+            return 1;
+        if(map[i][0] == map[i][1] == map[i][2] == map[i][3] == 'W')
+            return 1;
+        if(map[0][i] == map[1][i] == map[2][i] == map[3][i] == 'B')
+            return 1;
+        if(map[0][i] == map[1][i] == map[2][i] == map[3][i] == 'W')
+            return 1;
+    }
+
+    if(map[0][0] == map[1][1] == map[2][2] == map[3][3]) return 1;
+
+    if(map[0][3] == map[1][2] == map[2][1] == map[3][0]) return 1;
+
+    return 0;
+}
+
+void input():
+{
+    for(int i = 0; i < 4; i++)
+    {
+        for(int j = 0; j < 4; j++)
+            cin>>map[i][j];
+    }
+}
+
+void bfs()
+{
+    queue<char[4][4]> q;
+    
+}
+
+

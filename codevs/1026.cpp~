@@ -1,0 +1,122 @@
+/*************************************************************************
+	> File Name: 1026.cpp
+	> Author: dulun
+	> Mail: dulun@xiyoulinux.org
+	> Created Time: 2016年03月10日 星期四 21时33分31秒
+ ************************************************************************/
+
+#include<iostream>
+#include<stdio.h>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#define LL long long
+using namespace std;
+ 
+const int N = 50086;
+int g[60][60];
+int dir[1086];
+bool visit[60][60][60];
+
+int m, n;
+int k;
+
+
+
+void dfs(int x, int y, int t)
+{
+    if(visit[x][y][t]) return;
+    visit[x][y][t] = 1;
+
+    if(t > k)
+    {
+        g[x][y] = 2;
+        return;
+    }
+
+    if(dir[t] == 1)
+    {
+        x--;
+        while(x >= 1 && g[x][y] )
+        {
+            dfs(x, y, t+1);
+            x--;
+        }
+    }
+    if(dir[t] == 2)
+    {
+        x++;
+        while(x <= n && g[x][y] )
+        {
+            dfs(x, y, t+1);
+            x++;
+        }
+    }
+    if(dir[t] == 3)
+    {
+        y--;
+        while(y >= 1 && g[x][y] )
+        {
+            dfs(x, y, t+1);
+            y--;
+        }
+    }
+    if(dir[t] == 4)
+    {
+        y++;
+        while(y <= m && g[x][y] )
+        {
+            dfs(x, y, t+1);
+            y++;
+        }
+    }
+
+}
+
+
+
+int main()
+{
+    int x, y;
+    cin>>n>>m;
+
+    for(int i = 1; i <= n; i++)
+    for(int j = 1; j <= m; j++)
+    {
+        char t;
+        scanf("%c", &t);
+        if(t == '.') g[i][j] = 1;
+        if(t == 'X') g[i][j] = 0;
+        if(t == '*') 
+        {
+            g[i][j] = 2;
+            x = i;
+            y = j;
+        }
+    }
+
+    cin>>k;
+    for(int i = 0; i < k; i++)
+    {
+        char a[9];
+        cin>>a;
+        if(a[0] == 'N') dir[i] = 1;
+        if(a[0] == 'S') dir[i] = 2;
+        if(a[0] == 'W') dir[i] = 3;
+        if(a[0] == 'E') dir[i] = 4;
+    }
+
+    dfs(x, y, 1);
+
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= m; j++)
+        {
+            if(g[i][j] == 1) printf(".");
+            if(g[i][j] == 0) printf("X");
+            if(g[i][j] == 2) printf("*");
+        }
+        printf("\n");
+    }
+    return 0;
+}

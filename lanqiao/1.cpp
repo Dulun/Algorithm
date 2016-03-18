@@ -1,0 +1,34 @@
+/*************************************************************************
+	> File Name: 1.cpp
+	> Author: dulun
+	> Mail: dulun@xiyoulinux.org
+	> Created Time: 2016年03月14日 星期一 21时43分33秒
+ ************************************************************************/
+
+#include<iostream>
+#include<stdio.h>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#define LL long long
+using namespace std;
+ 
+const int N = 50086;
+ 
+int main()
+{
+    char a[100][100];
+    for(int i = 0; i < 100; i++)
+    for(int j = 0; j < 100; j++) a[i][j] = '#';
+
+    for(int i = 0; i < 100; i++)
+    {
+        for(int j = 0; j < 100; j++)
+        {
+            printf("%c", a[i][j]);
+        }
+        cout<<endl;
+    }
+ 
+    return 0;
+}
