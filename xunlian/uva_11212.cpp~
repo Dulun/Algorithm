@@ -1,0 +1,65 @@
+/*************************************************************************
+        > File Name: uva_11212.cpp
+      > Author: dulun
+      > Mail: dulun@xiyoulinux.org
+      > Created Time: 2016年04月15日 星期五 18时01分35秒
+ ************************************************************************/
+
+    #include <cstdio>
+    #include <cstring>
+    #include <iostream>
+    #include <algorithm>
+    using namespace std;
+    const int maxn = 10;
+
+    int n,a[maxn];
+    int is_sorted(){
+    for(int i=1;i<=n;i++) if(a[i]!=i) return false;
+    return true;
+    }
+    inline int h(){
+    int cnt=0;
+    for(int i=1;i<n;i++) if(a[i+1]!=a[i]+1) cnt++;
+    if(a[n]!=n) cnt++;
+    return cnt;
+    }
+    bool dfs(int d,int maxd){
+    if(3*d+h()>3*maxd) return false;
+    if(is_sorted()) return true;
+
+    int olda[maxn],b[maxn];
+    for(int i=1;i<=n;i++) olda[i]=a[i];
+
+    for(int i=1;i<=n;i++)
+      for(int j=i;j<=n;j++){
+
+        int cnt=1;
+        for(int k=1;k<=n;k++) if(k<i||k>j) b[cnt++]=olda[k];
+
+        for(int k=0;k<cnt;k++){
+            int cnt2=1;
+            for(int p=1;p<=k;p++) a[cnt2++]=b[p];
+            for(int p=i;p<=j;p++) a[cnt2++]=olda[p];
+            for(int p=k+1;p<cnt;p++) a[cnt2++]=b[p];
+            if(dfs(d+1,maxd)) return true;
+        }
+    }
+    return false;
+    }
+    int solve(){
+    if(is_sorted()) return 0;
+    int max_ans=5;
+    for(int maxd=1;maxd<max_ans;maxd++){
+          if(dfs(0,maxd))return maxd;
+    }
+    return max_ans;
+    }
+    int main()
+    {
+        int kase=1;
+        while(scanf("%d",&n)==1 && n){
+            for(int i=1;i<=n;i++) scanf("%d",&a[i]);
+            printf("Case %d: %d\n",kase++,solve());
+        }
+        return 0;
+    }

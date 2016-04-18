@@ -12,7 +12,7 @@
 #include<algorithm>
 #define LL long long
 using namespace std;
-const int inf = 1<<30; 
+const int inf = 1<<30;
 const int N = 506;
 int map[N][N];
 int d[N];
@@ -35,7 +35,7 @@ LL prim()
         }
         v[k] = 1;
         ans+=d[k];
-        for(int j = 0; j < n; j++) 
+        for(int j = 0; j < n; j++)
         {
             if(!v[j] && d[j] > map[k][j]) d[j] = map[k][j];
         }
@@ -49,7 +49,7 @@ int main()
     while(~scanf("%d", &n))
     {
         for(int i = 0; i < n; i++)
-        for(int j = 0; j < n; j++) { scanf("%d", &map[i][j]); d[i] = inf;} 
+        for(int j = 0; j < n; j++) { scanf("%d", &map[i][j]); d[i] = inf;}
         printf("%lld\n", prim());
     }
     return 0;
