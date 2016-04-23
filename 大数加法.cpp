@@ -64,17 +64,17 @@ void imsub()
     {
         for(int i = 0; i < 600 ;i++)
         {
-            c[i] = a[i] - b[i]; 
+            c[i] = a[i] - b[i];
         }
-        
+
     }
     if(flag == 1)
     {
         for(int i = 0; i < 600 ;i++)
         {
-            c[i] = b[i] - a[i]; 
+            c[i] = b[i] - a[i];
         }
-    }   
+    }
 
     int l = 0;
     for( l = 6000 - 1; l >=0; l--)
@@ -123,7 +123,7 @@ void mult()
             c[i] %= 10;
         }
     }
-        
+
 */
     print();
 }
