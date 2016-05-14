@@ -21,17 +21,27 @@ int main()
 {
     int v, n; 
     cin>>v>>n;
-
-    for(int i = 1; i <= n; i++) scanf("%d", &a[i]);
-
-
-    for(int i = v; i >= 0; i--)
-    for(int j = 1; j <= n; j++)
+    for(int i = 0; i < n; i++)
     {
-        if(i < a[j]) continue;
-        dp[i] = max(dp[i-a[j]]+a[j], dp[i]);
+        int t;
+        scanf("%d", &t);
+        for(int j = v; j >= t; j--)
+        {
+            if(dp[j-t] + t > dp[j]) dp[j] = dp[j-t] + t;
+        }
     }
     printf("%d\n", v-dp[v]);
 
+//    for(int i = 1; i <= n; i++) scanf("%d", &a[i]);
+//
+//
+//    for(int i = v; i >= 0; i--)
+//    for(int j = 1; j <= n; j++)
+//    {
+//        if(i < a[j]) continue;
+//        dp[i] = max(dp[i-a[j]]+a[j], dp[i]);
+//    }
+//    printf("%d\n", v-dp[v]);
+//
     return 0;
 }
